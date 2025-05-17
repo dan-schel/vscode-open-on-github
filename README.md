@@ -1,6 +1,6 @@
-# Open On GitHub
+# Open On GitHub commands
 
-A simple VS Code extension which adds shortcuts to open files on GitHub.
+A simple VS Code extension which adds commands to open files on GitHub.
 
 ## Features
 

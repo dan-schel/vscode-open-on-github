@@ -1,8 +1,8 @@
 {
-  "name": "open-on-github",
+  "name": "open-on-github-commands",
   "version": "1.0.0",
   "publisher": "dan-schel",
-  "displayName": "Open On GitHub",
+  "displayName": "Open on GitHub commands",
   "description": "Adds shortcuts to open files on GitHub",
   "repository": {
     "type": "git",
