@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 
-export type ErrorType = "unknown-scheme" | "not-github";
+export type ErrorType = "unknown-scheme" | "not-github" | "uri-outside-repo";
 
 export type Result = { webUrl: string } | { error: ErrorType };
 
@@ -8,24 +8,38 @@ export function buildWebUrl(
   repoCloneUrl: string,
   repoUri: vscode.Uri,
   branch: string,
-  uri: vscode.Uri
-) {
+  uri: vscode.Uri,
+  lines?: { start: number; end: number }
+): Result {
   const repoNameQuery = extractRepoName(repoCloneUrl);
   if ("error" in repoNameQuery) return { error: repoNameQuery.error };
+  const { repoName } = repoNameQuery;
 
-  return `https://github.com/${repoNameQuery.repoName}/blob/${branch}/${uri}`;
+  const path = uri.fsPath;
+  const repoPath = repoUri.fsPath;
+  if (!path.startsWith(repoPath)) return { error: "uri-outside-repo" };
+
+  const relativePath = path.slice(repoPath.length + 1);
+  const webUrl = `https://github.com/${repoName}/blob/${branch}/${relativePath}`;
+  return { webUrl };
 }
 
 function extractRepoName(
   cloneUrl: string
 ): { repoName: string } | { error: ErrorType } {
-  // git@github.com:dan-schel/train-disruptions.git
-  // https://github.com/dan-schel/train-disruptions.git
+  // HTTP: https://github.com/username/repo.git
+  // SSH:  git@github.com:username/repo.git
 
-  const http = /^https?:\/\/([^/]+)\/([^/]+)\/([^/]+)\.git$/g.exec(cloneUrl);
-
+  const http = /^https?:\/\/([^/]+)\/([^/]+)\/([^/]+)\.git$/gi.exec(cloneUrl);
   if (http != null) {
-    console.log(http);
+    if (!http[1].endsWith("github.com")) return { error: "not-github" };
+    return { repoName: `${http[2]}/${http[3]}` };
+  }
+
+  const ssh = /^([^@]+)@([^:]+):([^/]+)\/([^/]+)\.git$/gi.exec(cloneUrl);
+  if (ssh != null) {
+    if (!ssh[2].endsWith("github.com")) return { error: "not-github" };
+    return { repoName: `${ssh[3]}/${ssh[4]}` };
   }
 
   return { error: "unknown-scheme" };

@@ -5,6 +5,7 @@ export type Repo = {
   cloneUrl: string;
   rootUri: vscode.Uri;
   currentBranch: string;
+  currentCommit: string;
   defaultBranch: string;
 };
 
@@ -17,6 +18,7 @@ export type ErrorType =
   | "no-url"
   | "multiple-urls"
   | "unknown-current-branch"
+  | "unknown-current-commit"
   | "unknown-default-branch";
 
 export type Result = { repo: Repo } | { error: ErrorType };
@@ -37,6 +39,9 @@ export async function getRepo(file: vscode.Uri): Promise<Result> {
   const currentBranch = repo.state.HEAD?.name || repo.state.HEAD?.commit;
   if (currentBranch == null) return { error: "unknown-current-branch" };
 
+  const currentCommit = repo.state.HEAD?.commit;
+  if (currentCommit == null) return { error: "unknown-current-commit" };
+
   const branches = await repo.getBranches({ remote: false });
   const defaultBranch = determineDefaultBranch(branches);
   if (defaultBranch == null) return { error: "unknown-default-branch" };
@@ -55,7 +60,9 @@ export async function getRepo(file: vscode.Uri): Promise<Result> {
     return { error: "multiple-urls" };
   }
 
-  return { repo: { cloneUrl, rootUri, currentBranch, defaultBranch } };
+  return {
+    repo: { cloneUrl, rootUri, currentBranch, currentCommit, defaultBranch },
+  };
 }
 
 function accessGitApi() {
