@@ -44,6 +44,20 @@
       }
     ],
     "menus": {
+      "commandPalette": [
+        {
+          "command": "open-on-github.explorer.permalink",
+          "when": "false"
+        },
+        {
+          "command": "open-on-github.explorer.default",
+          "when": "false"
+        },
+        {
+          "command": "open-on-github.explorer.master",
+          "when": "false"
+        }
+      ],
       "editor/context": [
         {
           "command": "open-on-github.editor.permalink",
@@ -61,15 +75,29 @@
       "explorer/context": [
         {
           "command": "open-on-github.explorer.permalink",
-          "group": "0_open_on_github"
+          "group": "6_d_open_on_github"
         },
         {
           "command": "open-on-github.explorer.default",
-          "group": "0_open_on_github"
+          "group": "6_d_open_on_github"
         },
         {
           "command": "open-on-github.explorer.master",
-          "group": "0_open_on_github"
+          "group": "6_d_open_on_github"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "open-on-github.explorer.permalink",
+          "group": "1_d_open_on_github"
+        },
+        {
+          "command": "open-on-github.explorer.default",
+          "group": "1_d_open_on_github"
+        },
+        {
+          "command": "open-on-github.explorer.master",
+          "group": "1_d_open_on_github"
         }
       ]
     }

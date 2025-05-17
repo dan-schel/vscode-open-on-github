@@ -10,6 +10,16 @@ export const explorerPermalink = `${extensionId}.explorer.permalink`;
 export const explorerDefault = `${extensionId}.explorer.default`;
 export const explorerMaster = `${extensionId}.explorer.master`;
 
+// Note: There's a bit of reuse here:
+//
+// - The command palette displays the "editor" commands.
+//   It makes sense to link to the file open in the primary editor at the time.
+//
+// - The editor title bar context menu uses the "explorer" commands.
+//   This works because the interface is the same (they both get the URI from
+//   the args array passed to the command). This avoids a lot of additional code
+//   and means I don't need to disable extra commands in the command palette.
+
 export function activate(ctx: vscode.ExtensionContext) {
   buildCommand(ctx, editorPermalink, "copy", "editor", "permalink");
   buildCommand(ctx, editorDefault, "open", "editor", "default");
