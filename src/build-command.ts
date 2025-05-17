@@ -3,9 +3,9 @@ import { CopyAction } from "./action/copy-action";
 import { OpenAction } from "./action/open-action";
 import { EditorContext } from "./context/editor-context";
 import { ExplorerContext } from "./context/explorer-context";
-import { CurrentBranchLinkType } from "./link-type/current-branch-link-type";
-import { CurrentCommitLinkType } from "./link-type/current-commit-link-type";
-import { DefaultBranchLinkType } from "./link-type/default-branch-link-type";
+import { DefaultLinkType } from "./link-type/default-link-type";
+import { PermalinkLinkType } from "./link-type/permalink-link-type";
+import { MasterLinkType } from "./link-type/master-link-type";
 import { executeCommand } from "./execute-command";
 
 const actions = {
@@ -19,9 +19,9 @@ const contexts = {
 };
 
 const linkTypes = {
-  "current-branch": CurrentBranchLinkType.instance,
-  "current-commit": CurrentCommitLinkType.instance,
-  "default-branch": DefaultBranchLinkType.instance,
+  default: DefaultLinkType.instance,
+  permalink: PermalinkLinkType.instance,
+  master: MasterLinkType.instance,
 };
 
 export function buildCommand(

@@ -4,7 +4,7 @@ import { Context, ContextError } from "../context/context";
 import { LinkType, LinkTypeError } from "../link-type/link-type";
 import { CopyAction } from "../action/copy-action";
 import { OpenAction } from "../action/open-action";
-import { CurrentCommitLinkType } from "../link-type/current-commit-link-type";
+import { PermalinkLinkType } from "../link-type/permalink-link-type";
 import { RepoFetchError } from "./fetch-repo-details";
 import { BuildUrlError } from "./build-url";
 
@@ -14,9 +14,11 @@ type ErrorType =
   | RepoFetchError
   | BuildUrlError
   | "unknown";
+
 type ErrorResult = {
   error: ErrorType;
 };
+
 type ErrorContext = {
   action: Action;
   context: Context;
@@ -61,7 +63,7 @@ export function fail(result: ErrorResult, errCtx: ErrorContext): void {
 
 function determineFailure(errCtx: ErrorContext) {
   if (errCtx.action instanceof CopyAction) {
-    const isPermalink = errCtx.linkType instanceof CurrentCommitLinkType;
+    const isPermalink = errCtx.linkType instanceof PermalinkLinkType;
     return `Failed to copy ${isPermalink ? "permalink" : "link"}`;
   } else if (errCtx.action instanceof OpenAction) {
     return "Failed to open in GitHub";
