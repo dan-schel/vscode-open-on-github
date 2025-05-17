@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import { getSelection } from "../utils/get-selection";
-import { buildFailReporter } from "../utils/report-failure";
 import { getWebUrl } from "../utils/get-web-url";
+import { buildFailReporter } from "../utils/report-failure";
 import { copyGitHubPermalinkId } from "./ids";
 
 export async function copyGitHubPermalink() {
@@ -19,7 +19,7 @@ export async function copyGitHubPermalink() {
   await vscode.env.clipboard.writeText(webUrl);
 
   const response = await vscode.window.showInformationMessage(
-    "Copied to clipboard.",
+    "Copied link to clipboard.",
     "Open in browser"
   );
 
