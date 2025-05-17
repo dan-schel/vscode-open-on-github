@@ -12,7 +12,8 @@ import {
 export type AnyErrorType =
   | SelectionErrorType
   | RepoErrorType
-  | BuildUrlErrorType;
+  | BuildUrlErrorType
+  | "unknown";
 
 const friendlyCommandActionStrings: Record<CommandId, string> = {
   [copyGitHubPermalinkId]: "copy permalink",
@@ -43,6 +44,9 @@ const friendlyErrorMessages: Record<AnyErrorType, string> = {
   "not-github": "Current Git repo is published remotely, but not on GitHub",
   "uri-outside-repo":
     "Current Git repo doesn't contain the selected file/folder",
+
+  // General
+  unknown: "Something went wrong",
 };
 
 export function buildFailReporter(command: CommandId) {
