@@ -12,7 +12,7 @@ This extension adds three commands for opening files on GitHub:
 
 These commands are added to the context menus for files/folders in the explorer, as well as in the editor itself.
 
-<img width="400" src="./images/demo.png">
+<img width="500" src="./images/demo.png">
 
 ## Release Notes
 
