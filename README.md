@@ -1,6 +1,6 @@
-# open-in-github README
+# open-on-github README
 
-This is the README for your extension "open-in-github". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "open-on-github". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 

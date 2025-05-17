@@ -1,5 +1,5 @@
 {
-  "name": "open-in-github",
+  "name": "open-on-github",
   "displayName": "Open In GitHub",
   "description": "Adds a shortcut to open the current file in GitHub",
   "version": "0.0.1",
@@ -19,40 +19,40 @@
   "contributes": {
     "commands": [
       {
-        "command": "open-in-github.editorCopyGitHubPermalink",
+        "command": "open-on-github.editorCopyGitHubPermalink",
         "title": "Copy GitHub Permalink"
       },
       {
-        "command": "open-in-github.editorOpenInGitHub",
+        "command": "open-on-github.editorOpenInGitHub",
         "title": "Open in GitHub"
       },
       {
-        "command": "open-in-github.editorOpenInGitHubMaster",
+        "command": "open-on-github.editorOpenInGitHubMaster",
         "title": "Open in GitHub (on master/main)"
       },
       {
-        "command": "open-in-github.explorerCopyGitHubPermalink",
+        "command": "open-on-github.explorerCopyGitHubPermalink",
         "title": "Copy GitHub Permalink"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "open-in-github.editorCopyGitHubPermalink",
+          "command": "open-on-github.editorCopyGitHubPermalink",
           "group": "0_openingithub"
         },
         {
-          "command": "open-in-github.editorOpenInGitHub",
+          "command": "open-on-github.editorOpenInGitHub",
           "group": "0_openingithub"
         },
         {
-          "command": "open-in-github.editorOpenInGitHubMaster",
+          "command": "open-on-github.editorOpenInGitHubMaster",
           "group": "0_openingithub"
         }
       ],
       "explorer/context": [
         {
-          "command": "open-in-github.explorerCopyGitHubPermalink",
+          "command": "open-on-github.explorerCopyGitHubPermalink",
           "group": "0_openingithub"
         }
       ]

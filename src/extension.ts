@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { buildCommand } from "./build-command";
 
 // Note: If updating here, you also need to update in package.json.
-export const extensionId = "open-in-github";
+export const extensionId = "open-on-github";
 export const editorPermalink = `${extensionId}.editorCopyGitHubPermalink`;
 export const editorDefault = `${extensionId}.editorOpenInGitHub`;
 export const editorMaster = `${extensionId}.editorOpenInGitHubMaster`;
