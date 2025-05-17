@@ -8,7 +8,7 @@ export class EditorContext extends Context {
     super();
   }
 
-  async getSelectedPath(): Promise<ContextResult> {
+  async getSelectedPath(args: any[]): Promise<ContextResult> {
     const editor = vscode.window.activeTextEditor;
     if (editor == null) return { error: "no-editor" };
 

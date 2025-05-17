@@ -33,6 +33,14 @@
       {
         "command": "open-on-github.explorer.permalink",
         "title": "Copy GitHub Permalink"
+      },
+      {
+        "command": "open-on-github.explorer.default",
+        "title": "Open on GitHub"
+      },
+      {
+        "command": "open-on-github.explorer.master",
+        "title": "Open on GitHub (on master/main)"
       }
     ],
     "menus": {
@@ -53,6 +61,14 @@
       "explorer/context": [
         {
           "command": "open-on-github.explorer.permalink",
+          "group": "0_open_on_github"
+        },
+        {
+          "command": "open-on-github.explorer.default",
+          "group": "0_open_on_github"
+        },
+        {
+          "command": "open-on-github.explorer.master",
           "group": "0_open_on_github"
         }
       ]

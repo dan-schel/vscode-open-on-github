@@ -10,5 +10,5 @@ export type ContextResult =
   | { error: ContextError };
 
 export abstract class Context {
-  abstract getSelectedPath(): Promise<ContextResult>;
+  abstract getSelectedPath(args: any[]): Promise<ContextResult>;
 }

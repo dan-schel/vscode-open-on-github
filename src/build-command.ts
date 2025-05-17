@@ -32,8 +32,13 @@ export function buildCommand(
   linkType: keyof typeof linkTypes
 ) {
   ctx.subscriptions.push(
-    vscode.commands.registerCommand(id, () =>
-      executeCommand(actions[action], contexts[context], linkTypes[linkType])
+    vscode.commands.registerCommand(id, (...args) =>
+      executeCommand(
+        actions[action],
+        contexts[context],
+        linkTypes[linkType],
+        args
+      )
     )
   );
 }

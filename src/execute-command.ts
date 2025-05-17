@@ -8,12 +8,13 @@ import { fetchRepoDetails } from "./utils/fetch-repo-details";
 export async function executeCommand(
   action: Action,
   context: Context,
-  linkType: LinkType
+  linkType: LinkType,
+  args: any[]
 ) {
   const errCtx = { action, context, linkType };
 
   try {
-    const contextResult = await context.getSelectedPath();
+    const contextResult = await context.getSelectedPath(args);
     if ("error" in contextResult) return fail(contextResult, errCtx);
     const { selectedPath } = contextResult;
 
