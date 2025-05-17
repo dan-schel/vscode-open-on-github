@@ -9,15 +9,44 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "extensionDependencies": [
+    "vscode.git"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "open-in-github.helloWorld",
-        "title": "Hello World"
+        "command": "open-in-github.copyGitHubPermalink",
+        "title": "Copy GitHub Permalink"
+      },
+      {
+        "command": "open-in-github.openInGitHub",
+        "title": "Open in GitHub"
+      },
+      {
+        "command": "open-in-github.openInGitHubMaster",
+        "title": "Open in GitHub (on master/main)"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "open-in-github.copyGitHubPermalink",
+          "group": "0_openingithub"
+        },
+        {
+          "command": "open-in-github.openInGitHub",
+          "group": "0_openingithub"
+        },
+        {
+          "command": "open-in-github.openInGitHubMaster",
+          "group": "0_openingithub"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
