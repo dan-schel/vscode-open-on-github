@@ -1,35 +1,34 @@
-import * as vscode from "vscode";
+import { SelectedPath } from "../context/context";
+import { RepoDetails } from "./fetch-repo-details";
 
-export type ErrorType = "unknown-scheme" | "not-github" | "uri-outside-repo";
+export type BuildUrlError =
+  | "unknown-scheme"
+  | "not-github"
+  | "uri-outside-repo";
+export type BuildUrlResult = { url: string } | { error: BuildUrlError };
 
-export type Result = { webUrl: string } | { error: ErrorType };
-
-export type Lines = { start: number; end: number };
-
-export function buildWebUrl(
-  repoCloneUrl: string,
-  repoUri: vscode.Uri,
+export function buildUrl(
+  repoDetails: RepoDetails,
   branch: string,
-  uri: vscode.Uri,
-  lines: Lines | null
-): Result {
-  const repoNameQuery = extractRepoName(repoCloneUrl);
-  if ("error" in repoNameQuery) return { error: repoNameQuery.error };
+  selectedPath: SelectedPath
+): BuildUrlResult {
+  const repoNameQuery = extractRepoName(repoDetails.cloneUrl);
+  if ("error" in repoNameQuery) return repoNameQuery;
   const { repoName } = repoNameQuery;
 
-  const path = normalize(uri.fsPath);
-  const repoPath = normalize(repoUri.fsPath);
+  const path = normalize(selectedPath.uri.fsPath);
+  const repoPath = normalize(repoDetails.rootUri.fsPath);
   if (!path.startsWith(repoPath)) return { error: "uri-outside-repo" };
 
   const relativePath = path.slice(repoPath.length + 1);
-  const lineNumbers = createLineNumbersSuffix(lines);
-  const webUrl = `https://github.com/${repoName}/blob/${branch}/${relativePath}${lineNumbers}`;
-  return { webUrl };
+  const lineNumbers = createLineNumbersSuffix(selectedPath.lines);
+  const url = `https://github.com/${repoName}/blob/${branch}/${relativePath}${lineNumbers}`;
+  return { url };
 }
 
 function extractRepoName(
   cloneUrl: string
-): { repoName: string } | { error: ErrorType } {
+): { repoName: string } | { error: BuildUrlError } {
   // HTTP: https://github.com/username/repo.git
   const http = /^https?:\/\/([^/]+)\/([^/]+)\/([^/]+)\.git$/gi.exec(cloneUrl);
   if (http != null) {

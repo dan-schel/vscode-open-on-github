@@ -1,29 +1,16 @@
 import * as vscode from "vscode";
-import { editorCopyGitHubPermalink } from "./commands/editor-copy-github-permalink";
-import { editorOpenInGitHub } from "./commands/editor-open-in-github";
-import { editorOpenInGitHubMaster } from "./commands/editor-open-in-github-master";
-import {
-  editorCopyGitHubPermalinkId,
-  editorOpenInGitHubId,
-  editorOpenInGitHubMasterId,
-  explorerCopyGitHubPermalinkId,
-} from "./commands/ids";
-import { explorerCopyGitHubPermalink } from "./commands/explorer-copy-github-permalink";
+import { buildCommand } from "./build-command";
 
-export function activate(context: vscode.ExtensionContext) {
-  context.subscriptions.push(
-    vscode.commands.registerCommand(
-      editorCopyGitHubPermalinkId,
-      editorCopyGitHubPermalink
-    ),
-    vscode.commands.registerCommand(editorOpenInGitHubId, editorOpenInGitHub),
-    vscode.commands.registerCommand(
-      editorOpenInGitHubMasterId,
-      editorOpenInGitHubMaster
-    ),
-    vscode.commands.registerCommand(
-      explorerCopyGitHubPermalinkId,
-      explorerCopyGitHubPermalink
-    )
-  );
+// Note: If updating here, you also need to update in package.json.
+export const extensionId = "open-in-github";
+export const editorPermalink = `${extensionId}.editorCopyGitHubPermalink`;
+export const editorDefault = `${extensionId}.editorOpenInGitHub`;
+export const editorMaster = `${extensionId}.editorOpenInGitHubMaster`;
+export const explorerPermalink = `${extensionId}.explorerCopyGitHubPermalink`;
+
+export function activate(ctx: vscode.ExtensionContext) {
+  buildCommand(ctx, editorPermalink, "copy", "editor", "current-commit");
+  buildCommand(ctx, editorDefault, "open", "editor", "current-branch");
+  buildCommand(ctx, editorMaster, "open", "editor", "default-branch");
+  buildCommand(ctx, explorerPermalink, "copy", "editor", "current-commit");
 }
