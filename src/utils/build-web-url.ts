@@ -4,12 +4,14 @@ export type ErrorType = "unknown-scheme" | "not-github" | "uri-outside-repo";
 
 export type Result = { webUrl: string } | { error: ErrorType };
 
+export type Lines = { start: number; end: number };
+
 export function buildWebUrl(
   repoCloneUrl: string,
   repoUri: vscode.Uri,
   branch: string,
   uri: vscode.Uri,
-  lines?: { start: number; end: number }
+  lines: Lines | null
 ): Result {
   const repoNameQuery = extractRepoName(repoCloneUrl);
   if ("error" in repoNameQuery) return { error: repoNameQuery.error };
@@ -46,7 +48,7 @@ function extractRepoName(
 }
 
 function createLineNumbersSuffix(
-  lines: { start: number; end: number } | undefined
+  lines: { start: number; end: number } | null
 ): string {
   if (lines == null) return "";
   if (lines.start === lines.end) return `#L${lines.start}`;
