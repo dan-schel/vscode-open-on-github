@@ -4,9 +4,10 @@ import { ErrorType as RepoErrorType } from "./get-repo";
 import { ErrorType as BuildUrlErrorType } from "./build-web-url";
 import {
   CommandId,
-  copyGitHubPermalinkId,
-  openInGitHubId,
-  openInGitHubMasterId,
+  editorCopyGitHubPermalinkId,
+  editorOpenInGitHubId,
+  editorOpenInGitHubMasterId,
+  explorerCopyGitHubPermalinkId,
 } from "../commands/ids";
 
 export type AnyErrorType =
@@ -16,9 +17,10 @@ export type AnyErrorType =
   | "unknown";
 
 const friendlyCommandActionStrings: Record<CommandId, string> = {
-  [copyGitHubPermalinkId]: "copy permalink",
-  [openInGitHubId]: "open in GitHub",
-  [openInGitHubMasterId]: "open in GitHub",
+  [editorCopyGitHubPermalinkId]: "copy permalink",
+  [editorOpenInGitHubId]: "open in GitHub",
+  [editorOpenInGitHubMasterId]: "open in GitHub",
+  [explorerCopyGitHubPermalinkId]: "copy permalink",
 };
 
 const friendlyErrorMessages: Record<AnyErrorType, string> = {
