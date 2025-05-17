@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "publisher": "dan-schel",
   "displayName": "Open On GitHub",
-  "description": "Adds shortcuts to open the current file on GitHub",
+  "description": "Adds shortcuts to open files on GitHub",
   "repository": {
     "type": "git",
     "url": "https://github.com/dan-schel/vscode-open-on-github/"
