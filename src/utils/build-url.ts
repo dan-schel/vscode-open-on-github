@@ -22,7 +22,9 @@ export function buildUrl(
 
   const relativePath = path.slice(repoPath.length + 1);
   const lineNumbers = createLineNumbersSuffix(selectedPath.lines);
-  const url = `https://github.com/${repoName}/blob/${branch}/${relativePath}${lineNumbers}`;
+  const pageType = isFolder(path) ? "tree" : "blob";
+
+  const url = `https://github.com/${repoName}/${pageType}/${branch}/${relativePath}${lineNumbers}`;
   return { url };
 }
 
@@ -55,5 +57,9 @@ function createLineNumbersSuffix(
 }
 
 function normalize(path: string): string {
-  return path.replace(/\/$/g, "");
+  return path.replace(/\\/g, "/").replace(/\/$/g, "");
+}
+
+function isFolder(path: string): boolean {
+  return path.split("/").at(-1)?.includes(".") === false;
 }
