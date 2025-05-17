@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { GitExtension, Ref, Repository } from "./git";
+import { GitExtension, Repository } from "./types/git";
 
 export type RepoDetails = {
   cloneUrl: string;
