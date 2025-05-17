@@ -3,10 +3,10 @@ import { buildCommand } from "./build-command";
 
 // Note: If updating here, you also need to update in package.json.
 export const extensionId = "open-on-github";
-export const editorPermalink = `${extensionId}.editorCopyGitHubPermalink`;
-export const editorDefault = `${extensionId}.editorOpenInGitHub`;
-export const editorMaster = `${extensionId}.editorOpenInGitHubMaster`;
-export const explorerPermalink = `${extensionId}.explorerCopyGitHubPermalink`;
+export const editorPermalink = `${extensionId}.editor.permalink`;
+export const editorDefault = `${extensionId}.editor.default`;
+export const editorMaster = `${extensionId}.editor.master`;
+export const explorerPermalink = `${extensionId}.explorer.permalink`;
 
 export function activate(ctx: vscode.ExtensionContext) {
   buildCommand(ctx, editorPermalink, "copy", "editor", "permalink");

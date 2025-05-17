@@ -66,7 +66,7 @@ function determineFailure(errCtx: ErrorContext) {
     const isPermalink = errCtx.linkType instanceof PermalinkLinkType;
     return `Failed to copy ${isPermalink ? "permalink" : "link"}`;
   } else if (errCtx.action instanceof OpenAction) {
-    return "Failed to open in GitHub";
+    return "Failed to open on GitHub";
   } else {
     return "Command failed";
   }

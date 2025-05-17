@@ -1,7 +1,7 @@
 {
   "name": "open-on-github",
-  "displayName": "Open In GitHub",
-  "description": "Adds a shortcut to open the current file in GitHub",
+  "displayName": "Open On GitHub",
+  "description": "Adds shortcuts to open the current file on GitHub",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.100.0"
@@ -19,41 +19,41 @@
   "contributes": {
     "commands": [
       {
-        "command": "open-on-github.editorCopyGitHubPermalink",
+        "command": "open-on-github.editor.permalink",
         "title": "Copy GitHub Permalink"
       },
       {
-        "command": "open-on-github.editorOpenInGitHub",
-        "title": "Open in GitHub"
+        "command": "open-on-github.editor.default",
+        "title": "Open on GitHub"
       },
       {
-        "command": "open-on-github.editorOpenInGitHubMaster",
-        "title": "Open in GitHub (on master/main)"
+        "command": "open-on-github.editor.master",
+        "title": "Open on GitHub (on master/main)"
       },
       {
-        "command": "open-on-github.explorerCopyGitHubPermalink",
+        "command": "open-on-github.explorer.permalink",
         "title": "Copy GitHub Permalink"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "open-on-github.editorCopyGitHubPermalink",
-          "group": "0_openingithub"
+          "command": "open-on-github.editor.permalink",
+          "group": "0_open_on_github"
         },
         {
-          "command": "open-on-github.editorOpenInGitHub",
-          "group": "0_openingithub"
+          "command": "open-on-github.editor.default",
+          "group": "0_open_on_github"
         },
         {
-          "command": "open-on-github.editorOpenInGitHubMaster",
-          "group": "0_openingithub"
+          "command": "open-on-github.editor.master",
+          "group": "0_open_on_github"
         }
       ],
       "explorer/context": [
         {
-          "command": "open-on-github.explorerCopyGitHubPermalink",
-          "group": "0_openingithub"
+          "command": "open-on-github.explorer.permalink",
+          "group": "0_open_on_github"
         }
       ]
     }
