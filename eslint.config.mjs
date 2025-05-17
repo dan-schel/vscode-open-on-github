@@ -22,7 +22,7 @@ export default [
           format: ["camelCase", "PascalCase"],
         },
       ],
-      eqeqeq: "warn",
+      eqeqeq: ["warn", "always", { null: "ignore" }],
       "no-throw-literal": "warn",
       semi: "warn",
     },

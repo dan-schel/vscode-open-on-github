@@ -23,7 +23,7 @@ export type Result = { repo: Repo } | { error: ErrorType };
 
 export async function getRepo(file: vscode.Uri): Promise<Result> {
   const git = accessGitApi();
-  if (!git) return { error: "no-git" };
+  if (git == null) return { error: "no-git" };
 
   const repos = git.repositories.filter((r) =>
     file.fsPath.startsWith(r.rootUri.fsPath)
@@ -35,11 +35,11 @@ export async function getRepo(file: vscode.Uri): Promise<Result> {
   const rootUri = repo.rootUri;
 
   const currentBranch = repo.state.HEAD?.name || repo.state.HEAD?.commit;
-  if (!currentBranch) return { error: "unknown-current-branch" };
+  if (currentBranch == null) return { error: "unknown-current-branch" };
 
   const branches = await repo.getBranches({ remote: false });
   const defaultBranch = determineDefaultBranch(branches);
-  if (!defaultBranch) return { error: "unknown-default-branch" };
+  if (defaultBranch == null) return { error: "unknown-default-branch" };
 
   const remotes = repo.state.remotes;
   if (remotes.length === 0) return { error: "no-remote" };
@@ -47,11 +47,13 @@ export async function getRepo(file: vscode.Uri): Promise<Result> {
 
   const { fetchUrl, pushUrl } = remotes[0];
   const cloneUrl = fetchUrl || pushUrl;
-  if (!cloneUrl) return { error: "no-url" };
+  if (cloneUrl == null) return { error: "no-url" };
 
   // cloneUrl will be fetchUrl if defined, so if pushUrl is also defined, check
   // that it's the same.
-  if (pushUrl && cloneUrl !== pushUrl) return { error: "multiple-urls" };
+  if (pushUrl != null && cloneUrl !== pushUrl) {
+    return { error: "multiple-urls" };
+  }
 
   return { repo: { cloneUrl, rootUri, currentBranch, defaultBranch } };
 }
@@ -60,7 +62,7 @@ function accessGitApi() {
   try {
     const gitExtension =
       vscode.extensions.getExtension<GitExtension>("vscode.git")?.exports;
-    if (!gitExtension) return null;
+    if (gitExtension == null) return null;
     return gitExtension.getAPI(1);
   } catch {
     return null;
@@ -70,7 +72,7 @@ function accessGitApi() {
 function determineDefaultBranch(branches: Ref[]): string | null {
   const defaultBranches = ["master", "main"];
   for (const { name } of branches) {
-    if (!name) continue;
+    if (name == null) continue;
     if (defaultBranches.includes(name)) return name;
   }
   return null;

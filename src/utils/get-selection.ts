@@ -13,7 +13,7 @@ export type Result = { selection: Selection } | { error: ErrorType };
 
 export function getSelection(): Result {
   const editor = vscode.window.activeTextEditor;
-  if (!editor) return { error: "no-editor" };
+  if (editor == null) return { error: "no-editor" };
 
   return {
     selection: {
