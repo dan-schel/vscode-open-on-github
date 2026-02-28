@@ -10,8 +10,8 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 24.13.1
       - run: npm ci
@@ -20,3 +20,23 @@ jobs:
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
           OVSX_PAT: ${{ secrets.OVSX_PAT }}
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - run: echo "PACKAGE_VERSION=v$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+        id: version
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.13.1
+      - run: npm ci
+      - run: npm create-vsix
+      - uses: xresloader/upload-to-github-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          file: "*.vsix"
+          draft: false
+          tag_name: ${{ steps.version.outputs.PACKAGE_VERSION }}
