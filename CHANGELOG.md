@@ -1,5 +1,9 @@
 # Change Log
 
+## v2.0.1
+
+- No changes (just a version bump to test automatic release workflows)
+
 ## v2.0.0
 
 - Update command namespaces to avoid potential conflicts with other packages
