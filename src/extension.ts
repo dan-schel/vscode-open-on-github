@@ -3,6 +3,8 @@ import { buildCommand } from "./build-command";
 
 // Note: If updating here, you also need to update in package.json.
 export const extensionId = "dan-schel.open-on-github-commands";
+export const extensionDisplayName = "Open on GitHub commands";
+
 export const editorPermalink = `${extensionId}.editor.permalink`;
 export const editorDefault = `${extensionId}.editor.default`;
 export const editorMaster = `${extensionId}.editor.master`;
