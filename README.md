@@ -16,6 +16,12 @@ These commands are added to the context menus for files/folders in the explorer,
 
 ## Release Notes
 
+### 2.0.0
+
+- Update command namespaces to avoid potential conflicts with other packages
+- Start publishing to Open VSX registry
+- Fix case where clone URL reported by VS Code doesn't include the `.git` suffix
+
 ### 1.0.0
 
 - Initial release

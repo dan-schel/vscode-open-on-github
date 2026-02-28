@@ -10,7 +10,7 @@ export type BuildUrlResult = { url: string } | { error: BuildUrlError };
 export function buildUrl(
   repoDetails: RepoDetails,
   branch: string,
-  selectedPath: SelectedPath
+  selectedPath: SelectedPath,
 ): BuildUrlResult {
   const repoNameQuery = extractRepoName(repoDetails.cloneUrl);
   if ("error" in repoNameQuery) return repoNameQuery;
@@ -29,17 +29,19 @@ export function buildUrl(
 }
 
 function extractRepoName(
-  cloneUrl: string
+  cloneUrl: string,
 ): { repoName: string } | { error: BuildUrlError } {
-  // HTTP: https://github.com/username/repo.git
-  const http = /^https?:\/\/([^/]+)\/([^/]+)\/([^/]+)\.git$/gi.exec(cloneUrl);
+  // HTTP: https://github.com/username/repo[.git]
+  const httpRegex = /^https?:\/\/([^/]+)\/([^/]+)\/([^/]+)(\.git)?$/gi;
+  const http = httpRegex.exec(cloneUrl);
   if (http != null) {
     if (!http[1].endsWith("github.com")) return { error: "not-github" };
     return { repoName: `${http[2]}/${http[3]}` };
   }
 
-  // SSH: git@github.com:username/repo.git
-  const ssh = /^([^@]+)@([^:]+):([^/]+)\/([^/]+)\.git$/gi.exec(cloneUrl);
+  // SSH: git@github.com:username/repo[.git]
+  const sshRegex = /^([^@]+)@([^:]+):([^/]+)\/([^/]+)(\.git)?$/gi;
+  const ssh = sshRegex.exec(cloneUrl);
   if (ssh != null) {
     if (!ssh[2].endsWith("github.com")) return { error: "not-github" };
     return { repoName: `${ssh[3]}/${ssh[4]}` };
@@ -49,7 +51,7 @@ function extractRepoName(
 }
 
 function createLineNumbersSuffix(
-  lines: { start: number; end: number } | null
+  lines: { start: number; end: number } | null,
 ): string {
   if (lines == null) return "";
   if (lines.start === lines.end) return `#L${lines.start}`;

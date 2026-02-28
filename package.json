@@ -1,6 +1,6 @@
 {
   "name": "open-on-github-commands",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "publisher": "dan-schel",
   "displayName": "Open on GitHub commands",
   "description": "Adds shortcuts to open files on GitHub",
@@ -15,84 +15,84 @@
   "contributes": {
     "commands": [
       {
-        "command": "open-on-github.editor.permalink",
+        "command": "dan-schel.open-on-github-commands.editor.permalink",
         "title": "Copy GitHub Permalink"
       },
       {
-        "command": "open-on-github.editor.default",
+        "command": "dan-schel.open-on-github-commands.editor.default",
         "title": "Open on GitHub"
       },
       {
-        "command": "open-on-github.editor.master",
+        "command": "dan-schel.open-on-github-commands.editor.master",
         "title": "Open on GitHub (on master/main)"
       },
       {
-        "command": "open-on-github.explorer.permalink",
+        "command": "dan-schel.open-on-github-commands.explorer.permalink",
         "title": "Copy GitHub Permalink"
       },
       {
-        "command": "open-on-github.explorer.default",
+        "command": "dan-schel.open-on-github-commands.explorer.default",
         "title": "Open on GitHub"
       },
       {
-        "command": "open-on-github.explorer.master",
+        "command": "dan-schel.open-on-github-commands.explorer.master",
         "title": "Open on GitHub (on master/main)"
       }
     ],
     "menus": {
       "commandPalette": [
         {
-          "command": "open-on-github.explorer.permalink",
+          "command": "dan-schel.open-on-github-commands.explorer.permalink",
           "when": "false"
         },
         {
-          "command": "open-on-github.explorer.default",
+          "command": "dan-schel.open-on-github-commands.explorer.default",
           "when": "false"
         },
         {
-          "command": "open-on-github.explorer.master",
+          "command": "dan-schel.open-on-github-commands.explorer.master",
           "when": "false"
         }
       ],
       "editor/context": [
         {
-          "command": "open-on-github.editor.permalink",
+          "command": "dan-schel.open-on-github-commands.editor.permalink",
           "group": "0_open_on_github"
         },
         {
-          "command": "open-on-github.editor.default",
+          "command": "dan-schel.open-on-github-commands.editor.default",
           "group": "0_open_on_github"
         },
         {
-          "command": "open-on-github.editor.master",
+          "command": "dan-schel.open-on-github-commands.editor.master",
           "group": "0_open_on_github"
         }
       ],
       "explorer/context": [
         {
-          "command": "open-on-github.explorer.permalink",
+          "command": "dan-schel.open-on-github-commands.explorer.permalink",
           "group": "6_d_open_on_github"
         },
         {
-          "command": "open-on-github.explorer.default",
+          "command": "dan-schel.open-on-github-commands.explorer.default",
           "group": "6_d_open_on_github"
         },
         {
-          "command": "open-on-github.explorer.master",
+          "command": "dan-schel.open-on-github-commands.explorer.master",
           "group": "6_d_open_on_github"
         }
       ],
       "editor/title/context": [
         {
-          "command": "open-on-github.explorer.permalink",
+          "command": "dan-schel.open-on-github-commands.explorer.permalink",
           "group": "1_d_open_on_github"
         },
         {
-          "command": "open-on-github.explorer.default",
+          "command": "dan-schel.open-on-github-commands.explorer.default",
           "group": "1_d_open_on_github"
         },
         {
-          "command": "open-on-github.explorer.master",
+          "command": "dan-schel.open-on-github-commands.explorer.master",
           "group": "1_d_open_on_github"
         }
       ]
@@ -110,17 +110,25 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "create-vsix": "vsce package",
+    "publish": "vsce publish && ovsx publish",
+    "bump-check": "bump-check --ignore \"^renovate\\/\""
   },
   "devDependencies": {
-    "@types/vscode": "^1.100.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
+    "@types/vscode": "^1.100.0",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
-    "eslint": "^9.25.1",
-    "typescript": "^5.8.3",
     "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.5.2"
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.7.1",
+    "eslint": "^9.25.1",
+    "ovsx": "^0.10.9",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@dan-schel/js-utils": "^4.10.2"
   }
 }
