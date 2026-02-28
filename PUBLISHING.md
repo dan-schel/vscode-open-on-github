@@ -2,7 +2,7 @@
 
 There is a GitHub Action to automatically publish the extension to the VSCode Marketplace and Open VSX Registry on every push to master. For it to work, the personal access tokens for both need to be up to date (see instructions below).
 
-Pull request CI enforces that the version number is bumped for every pull request. Run `npm version patch/minor/major` to achieve this. You need to manually update the README.md and CHANGELOG.md files to add the changelog.
+Pull request CI enforces that the version number is bumped for every pull request. Run `npm version patch/minor/major` to achieve this. You need to manually update the `README.md` and `CHANGELOG.md` files to add the changelog.
 
 ## VSCode Marketplace Personal Access Token
 

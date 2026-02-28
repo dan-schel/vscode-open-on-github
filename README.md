@@ -22,6 +22,10 @@ These commands are added to the context menus for files/folders in the explorer,
 
 ## Release Notes
 
+### v2.0.2
+
+- No changes (just a version bump to test automatic release workflows)
+
 ### v2.0.1
 
 - No changes (just a version bump to test automatic release workflows)
