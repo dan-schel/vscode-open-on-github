@@ -6,8 +6,8 @@ on:
       - master
 
 jobs:
-  publish:
-    name: Publish
+  publish-vsce:
+    name: Publish to Visual Studio Marketplace
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -16,11 +16,24 @@ jobs:
           node-version: 24.13.1
       - run: npm ci
       - name: Publish
-        run: npm run publish
+        run: npm run publish-vsce
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
+  publish-ovsx:
+    name: Publish to Open VSX Registry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.13.1
+      - run: npm ci
+      - name: Publish
+        run: npm run publish-ovsx
+        env:
           OVSX_PAT: ${{ secrets.OVSX_PAT }}
   release:
+    name: Publish as GitHub Release
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -32,7 +45,7 @@ jobs:
         with:
           node-version: 24.13.1
       - run: npm ci
-      - run: npm create-vsix
+      - run: npm run create-vsix
       - uses: xresloader/upload-to-github-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

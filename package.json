@@ -1,6 +1,6 @@
 {
   "name": "open-on-github-commands",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "publisher": "dan-schel",
   "displayName": "Open on GitHub commands",
   "description": "Adds shortcuts to open files on GitHub",
@@ -112,7 +112,8 @@
     "lint": "eslint src",
     "test": "vscode-test",
     "create-vsix": "vsce package",
-    "publish": "vsce publish && ovsx publish",
+    "publish-vsce": "vsce publish",
+    "publish-ovsx": "ovsx publish",
     "bump-check": "bump-check --ignore \"^renovate\\/\""
   },
   "devDependencies": {
