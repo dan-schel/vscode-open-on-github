@@ -1,6 +1,6 @@
 {
   "name": "open-on-github-commands",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "publisher": "dan-schel",
   "displayName": "Open on GitHub commands",
   "description": "Adds shortcuts to open files on GitHub",
