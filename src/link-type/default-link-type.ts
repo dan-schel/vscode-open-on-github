@@ -13,4 +13,8 @@ export class DefaultLinkType extends LinkType {
     if (branch == null) return { error: "unknown-current-branch" };
     return { branch };
   }
+
+  get debugName(): string {
+    return "default";
+  }
 }

@@ -15,4 +15,8 @@ export class ExplorerContext extends Context {
       return { error: "explorer-nothing-selected" };
     }
   }
+
+  get debugName(): string {
+    return "explorer";
+  }
 }

@@ -1,4 +1,5 @@
 import { SelectedPath } from "../context/context";
+import { DebugOutput } from "./debug-output";
 import { RepoDetails } from "./fetch-repo-details";
 
 export type BuildUrlError =
@@ -13,12 +14,18 @@ export function buildUrl(
   selectedPath: SelectedPath,
 ): BuildUrlResult {
   const repoNameQuery = extractRepoName(repoDetails.cloneUrl);
-  if ("error" in repoNameQuery) return repoNameQuery;
+  if ("error" in repoNameQuery) {
+    DebugOutput.log(`Strange clone URL: ${repoDetails.cloneUrl}`);
+    return repoNameQuery;
+  }
   const { repoName } = repoNameQuery;
 
   const path = normalize(selectedPath.uri.fsPath);
   const repoPath = normalize(repoDetails.rootUri.fsPath);
-  if (!path.startsWith(repoPath)) return { error: "uri-outside-repo" };
+  if (!path.startsWith(repoPath)) {
+    DebugOutput.log(`URI outside repo (repoPath: ${repoPath}, path: ${path})`);
+    return { error: "uri-outside-repo" };
+  }
 
   const relativePath = path.slice(repoPath.length + 1);
   const lineNumbers = createLineNumbersSuffix(selectedPath.lines);
@@ -32,7 +39,7 @@ function extractRepoName(
   cloneUrl: string,
 ): { repoName: string } | { error: BuildUrlError } {
   // HTTP: https://github.com/username/repo[.git]
-  const httpRegex = /^https?:\/\/([^/]+)\/([^/]+)\/([^/]+)(\.git)?$/gi;
+  const httpRegex = /^https?:\/\/([^/]+)\/([^/]+)\/([^/]+?)(\.git)?$/gi;
   const http = httpRegex.exec(cloneUrl);
   if (http != null) {
     if (!http[1].endsWith("github.com")) return { error: "not-github" };
@@ -40,7 +47,7 @@ function extractRepoName(
   }
 
   // SSH: git@github.com:username/repo[.git]
-  const sshRegex = /^([^@]+)@([^:]+):([^/]+)\/([^/]+)(\.git)?$/gi;
+  const sshRegex = /^([^@]+)@([^:]+):([^/]+)\/([^/]+?)(\.git)?$/gi;
   const ssh = sshRegex.exec(cloneUrl);
   if (ssh != null) {
     if (!ssh[2].endsWith("github.com")) return { error: "not-github" };

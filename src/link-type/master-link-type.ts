@@ -13,4 +13,8 @@ export class MasterLinkType extends LinkType {
     if (branch == null) return { error: "unknown-default-branch" };
     return { branch };
   }
+
+  get debugName(): string {
+    return "master";
+  }
 }

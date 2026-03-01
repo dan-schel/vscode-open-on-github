@@ -8,4 +8,5 @@ export type LinkTypeResult = { branch: string } | { error: LinkTypeError };
 
 export abstract class LinkType {
   abstract selectBranch(repoDetails: RepoDetails): LinkTypeResult;
+  abstract get debugName(): string;
 }

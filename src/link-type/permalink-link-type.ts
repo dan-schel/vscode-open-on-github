@@ -13,4 +13,8 @@ export class PermalinkLinkType extends LinkType {
     if (branch == null) return { error: "unknown-current-commit" };
     return { branch };
   }
+
+  get debugName(): string {
+    return "permalink";
+  }
 }
