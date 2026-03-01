@@ -13,6 +13,9 @@ export async function executeCommand(
   args: any[],
 ) {
   const errCtx = { action, context, linkType };
+  DebugOutput.log("");
+  DebugOutput.log("---");
+  DebugOutput.log("");
   DebugOutput.log(`Executing command: ${JSON.stringify(errCtx, null, 2)}`);
 
   try {
@@ -39,6 +42,4 @@ export async function executeCommand(
     DebugOutput.log(`Unexpected error: ${err}`);
     return fail({ error: "unknown" }, errCtx);
   }
-
-  DebugOutput.log(`---`);
 }
