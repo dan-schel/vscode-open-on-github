@@ -13,11 +13,15 @@ export class CopyAction extends Action {
 
     const response = await vscode.window.showInformationMessage(
       "Copied link to clipboard.",
-      "Open in browser"
+      "Open in browser",
     );
 
     if (response === "Open in browser") {
       await vscode.env.openExternal(vscode.Uri.parse(url));
     }
+  }
+
+  get debugName(): string {
+    return "copy";
   }
 }

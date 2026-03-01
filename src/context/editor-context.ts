@@ -22,4 +22,8 @@ export class EditorContext extends Context {
       },
     };
   }
+
+  get debugName(): string {
+    return "editor";
+  }
 }

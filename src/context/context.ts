@@ -11,4 +11,5 @@ export type ContextResult =
 
 export abstract class Context {
   abstract getSelectedPath(args: any[]): Promise<ContextResult>;
+  abstract get debugName(): string;
 }

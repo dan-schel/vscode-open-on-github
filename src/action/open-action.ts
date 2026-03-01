@@ -11,4 +11,8 @@ export class OpenAction extends Action {
   async perform(url: string): Promise<void> {
     await vscode.env.openExternal(vscode.Uri.parse(url));
   }
+
+  get debugName(): string {
+    return "open";
+  }
 }

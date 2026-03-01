@@ -13,10 +13,11 @@ export async function executeCommand(
   args: any[],
 ) {
   const errCtx = { action, context, linkType };
+
   DebugOutput.log("");
   DebugOutput.log("---");
   DebugOutput.log("");
-  DebugOutput.log(`Executing command: ${JSON.stringify(errCtx, null, 2)}`);
+  DebugOutput.log(`Executing command: ${errCtxToString(errCtx)}`);
 
   try {
     const contextResult = await context.getSelectedPath(args);
@@ -42,4 +43,20 @@ export async function executeCommand(
     DebugOutput.log(`Unexpected error: ${err}`);
     return fail({ error: "unknown" }, errCtx);
   }
+}
+
+function errCtxToString(errCtx: {
+  action: Action;
+  context: Context;
+  linkType: LinkType;
+}) {
+  return JSON.stringify(
+    {
+      action: errCtx.action.debugName,
+      context: errCtx.context.debugName,
+      linkType: errCtx.linkType.debugName,
+    },
+    null,
+    2,
+  );
 }
