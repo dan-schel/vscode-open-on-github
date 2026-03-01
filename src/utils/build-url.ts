@@ -39,7 +39,7 @@ function extractRepoName(
   cloneUrl: string,
 ): { repoName: string } | { error: BuildUrlError } {
   // HTTP: https://github.com/username/repo[.git]
-  const httpRegex = /^https?:\/\/([^/]+)\/([^/]+)\/([^/]+)(\.git)?$/gi;
+  const httpRegex = /^https?:\/\/([^/]+)\/([^/]+)\/([^/]+?)(\.git)?$/gi;
   const http = httpRegex.exec(cloneUrl);
   if (http != null) {
     if (!http[1].endsWith("github.com")) return { error: "not-github" };
@@ -47,7 +47,7 @@ function extractRepoName(
   }
 
   // SSH: git@github.com:username/repo[.git]
-  const sshRegex = /^([^@]+)@([^:]+):([^/]+)\/([^/]+)(\.git)?$/gi;
+  const sshRegex = /^([^@]+)@([^:]+):([^/]+)\/([^/]+?)(\.git)?$/gi;
   const ssh = sshRegex.exec(cloneUrl);
   if (ssh != null) {
     if (!ssh[2].endsWith("github.com")) return { error: "not-github" };
