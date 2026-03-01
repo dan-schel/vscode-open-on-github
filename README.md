@@ -22,6 +22,11 @@ These commands are added to the context menus for files/folders in the explorer,
 
 ## Release Notes
 
+### v2.0.3
+
+- Add debug logging
+- Fix bug that caused `.git` to be added to github URLs.
+
 ### v2.0.2
 
 - No changes (just a version bump to test automatic release workflows)
