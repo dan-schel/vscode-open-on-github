@@ -1,5 +1,9 @@
 # Change Log
 
+### v2.0.4
+
+- Add logging to help identify potential repo search issue
+
 ## v2.0.3
 
 - Add debug logging

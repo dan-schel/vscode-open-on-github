@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { GitExtension, Repository } from "./types/git";
+import { DebugOutput } from "./debug-output";
 
 export type RepoDetails = {
   cloneUrl: string;
@@ -23,14 +24,16 @@ export type RepoFetchResult =
   | { error: RepoFetchError };
 
 export async function fetchRepoDetails(
-  uri: vscode.Uri
+  uri: vscode.Uri,
 ): Promise<RepoFetchResult> {
   const git = accessGitApi();
   if (git == null) return { error: "no-git" };
 
+  DebugOutput.log(`Repo search: ${repoSearchDebugInfo(uri, git.repositories)}`);
+
   // Fetch the list of repos, and assert that there's exactly 1.
   const repos = git.repositories.filter((r) =>
-    uri.fsPath.startsWith(r.rootUri.fsPath)
+    uri.fsPath.startsWith(r.rootUri.fsPath),
   );
   if (repos.length === 0) return { error: "no-repo" };
   if (repos.length > 1) return { error: "multiple-repos" };
@@ -72,7 +75,7 @@ function accessGitApi() {
 }
 
 async function determineDefaultBranch(
-  repo: Repository
+  repo: Repository,
 ): Promise<string | null> {
   const branches = await repo.getBranches({ remote: false });
   const defaultBranches = ["master", "main"];
@@ -82,4 +85,25 @@ async function determineDefaultBranch(
     if (defaultBranches.includes(name)) return name;
   }
   return null;
+}
+
+function repoSearchDebugInfo(
+  uri: vscode.Uri,
+  gitRepositories: Repository[],
+): string {
+  return JSON.stringify(
+    {
+      uri: uri.fsPath,
+      gitRepositories: gitRepositories.map((r) => ({
+        rootUri: r.rootUri.fsPath,
+        remotes: r.state.remotes.map((remote) => ({
+          name: remote.name,
+          fetchUrl: remote.fetchUrl,
+          pushUrl: remote.pushUrl,
+        })),
+      })),
+    },
+    null,
+    2,
+  );
 }
