@@ -22,6 +22,10 @@ These commands are added to the context menus for files/folders in the explorer,
 
 ## Release Notes
 
+### v2.0.4
+
+- Add logging to help identify potential repo search issue
+
 ### v2.0.3
 
 - Add debug logging
