@@ -28,7 +28,7 @@ export async function executeCommand(
     if ("error" in repoDetailsResult) return fail(repoDetailsResult, errCtx);
     const { repoDetails } = repoDetailsResult;
 
-    DebugOutput.log(`Repo details: ${JSON.stringify(repoDetails, null, 2)}`);
+    DebugOutput.log(`Selected repo: ${JSON.stringify(repoDetails, null, 2)}`);
 
     const linkTypeResult = linkType.selectBranch(repoDetails);
     if ("error" in linkTypeResult) return fail(linkTypeResult, errCtx);
